@@ -1,11 +1,11 @@
+'use client'
 
-
-export default function({ noticia }) {
+export default function( props ) {
   return (
     <div>
-      <div>{ noticia.title }</div>
-      <img src="{ noticia..img }" alt="Noticia" />
-      <div dangerouslySetInnerHTML={ noticia.texto }/>
+      <div>{ props.noticia.title }</div>
+      <img src="{ props.noticia.img }" alt="Noticia" />
+      <div dangerouslySetInnerHTML={ {__html: props.noticia.texto } }/>
     </div>
   )
 }
