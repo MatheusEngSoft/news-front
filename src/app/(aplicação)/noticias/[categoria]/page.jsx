@@ -1,4 +1,4 @@
-import Noticia from "@/components/Noticia"
+import GridNoticias from '../../../../components/GridNoticias'
 
 const noticias = [
   {
@@ -21,11 +21,13 @@ const noticias = [
   }
 ]
 
-export default function HomePage() {
+const NoticiaPage = ({ params }) => {
   return (
     <div>
-      <h1>Home</h1>
-      {noticias.map(noticia => <Noticia key={noticia.key} noticia={noticia}/>)}
+      <h1>{ params.categoria }</h1>
+      <GridNoticias noticias={noticias}/>
     </div>
   )
 }
+
+export default NoticiaPage
