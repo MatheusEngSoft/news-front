@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 const usuarioModel = require('./src/module/usuario/usuario.model');
 const app = express();
 app.use(express.json());
@@ -36,6 +37,7 @@ app.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Senha incorreta' });
     }
 
+    const token =  jwt.sign({ id: usuarioExistente._id}, 'dnc')
     return res.status(200).json({ message: 'Login bem-sucedido', usuario: usuarioExistente });
   } catch (error) {
     return res.status(500).json({ message: 'Erro ao se conectar' });
