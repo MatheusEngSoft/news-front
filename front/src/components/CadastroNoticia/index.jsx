@@ -1,13 +1,33 @@
 'use client'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-export default function() {
+export default function CadastroNoticia() {
+  const router = useRouter()
   const [titulo, setTitulo] = useState('')
   const [img, setImg] = useState('')
   const [texto, setTexto] = useState('')
+  const [categoria, setCategoria] = useState('')
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
+    try {
+      const formulario = {
+        titulo,
+        img,
+        texto,
+        categoria
+      }
+      const result = await axios.post('http://localhost:8080/noticias', formulario)
+      console.log(result)
+      alert('Noticia criada com sucesso!')
+      router.push('/home')
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || 'Erro ao criar notícia'
+      alert(errorMessage)
+    }
+    
     console.log('submeteu', titulo, img, texto)
   }
 
@@ -22,6 +42,11 @@ export default function() {
         break
       case 'texto':
         setTexto(value)
+        break
+      case 'categoria':
+        setCategoria(value)
+        break
+      default:
         break
     }
   }
@@ -38,6 +63,15 @@ export default function() {
       <div>
         <label htmlFor="texto">Texto</label>
         <textarea name="texto" onChange={handleChange} />
+      </div>
+      <div>
+        <label htmlFor="categoria">Categoria</label>
+        <select name="categoria" onChange={handleChange}>
+          <option value="produto">Produto</option>
+          <option value="tecnologia">Tecnologia</option>
+          <option value="rh">RH</option>
+          <option value="venda">Venda</option>
+        </select>
       </div>
       <button type="submit">Cadastrar Noticia</button>
     </form>

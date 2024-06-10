@@ -101,7 +101,6 @@ app.get('/usuarios', async (_, res) => {
     const usuarios = await usuarioModel.find();
     return res.status(200).json(usuarios);
   } catch (error) {
-    return res.status
     return res.status(500).json({ message: 'Erro ao buscar usuários' });
   }
 });

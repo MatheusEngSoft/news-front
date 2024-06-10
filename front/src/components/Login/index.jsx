@@ -1,7 +1,10 @@
 'use client'
+import axios from 'axios'
+import { useRouter} from 'next/navigation'
 import { useState } from 'react'
 
 export default function LoginForm() {
+    const router = useRouter()
     const [formulario, setFormulario] = useState({
         email:'',
         senha:''
@@ -14,11 +17,17 @@ export default function LoginForm() {
             [name]: value
         })
     }
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-
-        //TODO: enviar os dados para o servidor
-        console.log(formulario)
+        try{
+            const result = await axios.post('http://localhost:8080/login', formulario)
+            console.log(result)
+            alert(result.data.message)
+            router.push('/admin/noticia/criar')
+        }catch (error){
+            alert(error.response.data.message)
+        }
+        console.log(result)    
     }
     return (
         <form onSubmit={handleSubmit}>
