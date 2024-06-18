@@ -8,7 +8,7 @@ const NoticiaPage = ({ params }) => {
 
   async function getNoticias(){
     try {
-      const result = await axios.get(`http://localhost:8080/noticias?categoria=${query.categoria}`)
+      const result = await axios.get(`http://localhost:8080/noticias?categoria=${params.categoria}`)
       setNoticias(result.data)
     }catch(error) {
       alert(error.response.data.message)

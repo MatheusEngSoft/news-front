@@ -1,11 +1,14 @@
 'use client'
 
+import './style.css'
+
 export default function( props ) {
   return (
-    <div>
-      <div>{ props.noticia.title }</div>
-      <img src="{ props.noticia.img }" alt="Noticia" />
-      <div dangerouslySetInnerHTML={ {__html: props.noticia.texto } }/>
+    <div className='noticia'>      
+      <img className='imagem' style={{ backgroundImage: `url(${ props.noticia.img })` }}/>
+      <div className='titulo'>{ props.noticia.title }</div>
+      <div className="publicado-em">{new Date(props.noticia.createdAt).toLocaleDateString('pt-BR') }</div>
+      <div className='texto' dangerouslySetInnerHTML={ {__html: props.noticia.texto } }/>
     </div>
   )
 }

@@ -1,16 +1,28 @@
 'use client'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function CadastroForm() {
+    const router = useRouter()
+    const [nome, setNome] = useState('')
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
 
-    const [nome, setNome] = useState()
-    const [email, setEmail] = useState()
-    const [senha, setSenha] = useState()
-
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
-
-        //TODO: enviar os dados para o servidor
+        try {
+            const formulario = {
+                nome,
+                email,
+                senha
+            }
+            const result = await axios.post('http://localhost:8080/usuarios', formulario)
+            alert('Usuario Cadastrado com Sucesso!')
+            router.push('/admin/noticia/criar')
+        } catch (error) {
+            alert(error.response.data.message)
+        }
         console.log(nome, email, senha)
     }
 

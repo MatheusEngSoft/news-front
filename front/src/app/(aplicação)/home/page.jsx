@@ -20,8 +20,8 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div>
-      <h1>Home</h1>
+    <div style={{ background: '#f3f3f3', color: '#333'}}>
+      <h1 style={{ padding: '10px 0', textAlign: 'center'}}>Home</h1>
       {noticias.length > 0 ? (
         noticias.map(noticia => <Noticia key={noticia.key} noticia={noticia}/>)
       ) : (
