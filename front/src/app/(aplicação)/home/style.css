@@ -1,0 +1,7 @@
+.grid-home {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: #f3f3f3;
+    color: #333;
+    margin-top: 20px;
+}
